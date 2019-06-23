@@ -16,6 +16,4 @@ public class pecaXadres extends Peca {
 		return cor;
 	}
 
-	
-	
 }

@@ -27,8 +27,8 @@ public class partidaXadres {
 	}
 
 	private void configuracaoInicial() {
-		tabuleiro.posicaoPeca(new Torre(tabuleiro, Cor.BRANCO), new Posicao(2, 1));
-		tabuleiro.posicaoPeca(new Rei(tabuleiro, Cor.PRETO), new Posicao(0,4));
+		tabuleiro.posicaoPeca(new Torre(tabuleiro, Cor.BRANCO), new Posicao(7, 1));
+		tabuleiro.posicaoPeca(new Rei(tabuleiro, Cor.PRETO), new Posicao(7,1));
 		tabuleiro.posicaoPeca(new Rei(tabuleiro, Cor.BRANCO), new Posicao(7,4));
 	}
 
