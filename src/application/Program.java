@@ -1,14 +1,14 @@
 package application;
 
-import boardgame.Tabuleiro;
+import xadres.partidaXadres;
 
 public class Program {
 
 	public static void main(String[] args) {
 		
-		Tabuleiro tabuleiro = new Tabuleiro(8, 8);
-		System.out.println(tabuleiro);
-
+		partidaXadres partida = new partidaXadres();
+		UI.imprimeTabuleiro(partida.getpecas());
+		
 	}
 
 }
