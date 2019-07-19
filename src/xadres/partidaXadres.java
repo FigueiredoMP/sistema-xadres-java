@@ -1,6 +1,5 @@
 package xadres;
 
-import boardgame.Posicao;
 import boardgame.Tabuleiro;
 import xadres.pecas.Rei;
 import xadres.pecas.Torre;
@@ -26,10 +25,15 @@ public class partidaXadres {
 		return mat;
 	}
 
+	private void posicaoPeca(char coluna, int linha, pecaXadres peca) {
+		tabuleiro.posicaoPeca(peca, new posicaoXadrez(coluna, linha).toPosicao());
+	}
+
 	private void configuracaoInicial() {
-		tabuleiro.posicaoPeca(new Torre(tabuleiro, Cor.BRANCO), new Posicao(7, 1));
-		tabuleiro.posicaoPeca(new Rei(tabuleiro, Cor.PRETO), new Posicao(7,1));
-		tabuleiro.posicaoPeca(new Rei(tabuleiro, Cor.BRANCO), new Posicao(7,4));
+		posicaoPeca('b', 6, new Torre(tabuleiro, Cor.BRANCO));
+		posicaoPeca('e', 8, new Rei(tabuleiro, Cor.PRETO));
+		posicaoPeca('e', 1, new Rei(tabuleiro, Cor.BRANCO));
+
 	}
 
 }
