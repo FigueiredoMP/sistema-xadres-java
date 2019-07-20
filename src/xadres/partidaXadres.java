@@ -30,9 +30,19 @@ public class partidaXadres {
 	}
 
 	private void configuracaoInicial() {
-		posicaoPeca('b', 6, new Torre(tabuleiro, Cor.BRANCO));
-		posicaoPeca('e', 8, new Rei(tabuleiro, Cor.PRETO));
-		posicaoPeca('e', 1, new Rei(tabuleiro, Cor.BRANCO));
+		posicaoPeca('c', 1, new Torre(tabuleiro, Cor.BRANCO));
+		posicaoPeca('c', 2, new Torre(tabuleiro, Cor.BRANCO));
+		posicaoPeca('d', 2, new Torre(tabuleiro, Cor.BRANCO));
+		posicaoPeca('e', 2, new Torre(tabuleiro, Cor.BRANCO));
+		posicaoPeca('e', 1, new Torre(tabuleiro, Cor.BRANCO));
+		posicaoPeca('d', 1, new Rei(tabuleiro, Cor.BRANCO));
+
+		posicaoPeca('c', 7, new Torre(tabuleiro, Cor.PRETO));
+		posicaoPeca('c', 8, new Torre(tabuleiro, Cor.PRETO));
+		posicaoPeca('d', 7, new Torre(tabuleiro, Cor.PRETO));
+		posicaoPeca('e', 7, new Torre(tabuleiro, Cor.PRETO));
+		posicaoPeca('e', 8, new Torre(tabuleiro, Cor.PRETO));
+		posicaoPeca('d', 8, new Rei(tabuleiro, Cor.PRETO));
 
 	}
 

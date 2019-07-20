@@ -24,7 +24,7 @@ public class UI {
 	public static final String ANSI_BLUE_BACKGROUND = "\u001B[44m";
 	public static final String ANSI_PURPLE_BACKGROUND = "\u001B[45m";
 	public static final String ANSI_CYAN_BACKGROUND = "\u001B[46m";
-	public static final String ANSI_WHITE_BACKGROUND = "\u001B[47m";	
+	public static final String ANSI_WHITE_BACKGROUND = "\u001B[47m";
 
 	public static void imprimeTabuleiro(pecaXadres[][] pecas) {
 
@@ -40,18 +40,16 @@ public class UI {
 	}
 
 	private static void imprimePeca(pecaXadres peca) {
-    	if (peca == null) {
-            System.out.print("-");
-        }
-        else {
-            if (peca.getCor() == Cor.BRANCO) {
-                System.out.print(ANSI_WHITE + peca + ANSI_RESET);
-            }
-            else {
-                System.out.print(ANSI_YELLOW + peca + ANSI_RESET);
-            }
-        }
-        System.out.print(" ");
+		if (peca == null) {
+			System.out.print("-");
+		} else {
+			if (peca.getCor() == Cor.BRANCO) {
+				System.out.print(ANSI_WHITE + peca + ANSI_RESET);
+			} else {
+				System.out.print(ANSI_YELLOW + peca + ANSI_RESET);
+			}
+		}
+		System.out.print(" ");
 	}
 
 }
