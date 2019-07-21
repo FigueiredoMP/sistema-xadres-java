@@ -15,4 +15,10 @@ public class Rei extends pecaXadres{
 		return "R";
 	}
 
+	@Override
+	public boolean[][] movimentoPossivel() {
+		boolean[][] mat = new boolean[getTabuleiro().getLinhas()][getTabuleiro().getColunas()];
+		return mat;
+	}
+
 }

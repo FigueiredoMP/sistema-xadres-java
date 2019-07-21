@@ -44,9 +44,12 @@ public class partidaXadres {
 	
 	private void validarPosicaoOrigem(Posicao posicao) {
 		if(!tabuleiro.existePeca(posicao)) {
-			throw new excessaoXadrez("Não há uma peça na posição de origem");
+			throw new excessaoXadrez("Nao ha uma peca na posicao de origem");
 		}
-	}
+		if(tabuleiro.peca(posicao).existeMovimentoPossivel()) {
+			throw new excessaoXadrez("Nao existe movimentos para a peca escolhida!");
+		}
+			}
 	
 	private void posicaoNovaPeca(char coluna, int linha, pecaXadres peca) {
 		tabuleiro.posicaoPeca(peca, new posicaoXadrez(coluna, linha).toPosicao());
