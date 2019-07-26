@@ -52,21 +52,38 @@ public class UI {
 		for (int i = 0; i < pecas.length; i++) {
 			System.out.print((8 - i) + " ");
 			for (int j = 0; j < pecas.length; j++) {
-				imprimePeca(pecas[i][j]);
+				imprimePeca(pecas[i][j], false);
 			}
 			System.out.println();
 		}
-		System.out.println("   a b c d e f g h");
+		System.out.println("  a b c d e f g h");
 
 	}
 
-	private static void imprimePeca(pecaXadres peca) {
+	public static void imprimeTabuleiro(pecaXadres[][] pecas, boolean[][] possivelMovimento) {
+		for (int i = 0; i < pecas.length; i++) {
+			System.out.print((8 - i) + " ");
+			for (int j = 0; j < pecas.length; j++) {
+				imprimePeca(pecas[i][j], possivelMovimento[i][j]);
+			}
+			System.out.println();
+		}
+		System.out.println("  a b c d e f g h");
+
+	}
+
+	private static void imprimePeca(pecaXadres peca, boolean fundo) {
+		if (fundo) {
+			System.out.print(ANSI_BLUE_BACKGROUND);
+		}
 		if (peca == null) {
-			System.out.print("-");
-		} else {
+			System.out.print("-" + ANSI_RESET);
+		} 
+		else {
 			if (peca.getCor() == Cor.BRANCO) {
 				System.out.print(ANSI_WHITE + peca + ANSI_RESET);
-			} else {
+			} 
+			else {
 				System.out.print(ANSI_YELLOW + peca + ANSI_RESET);
 			}
 		}
