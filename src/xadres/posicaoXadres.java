@@ -2,14 +2,14 @@ package xadres;
 
 import boardgame.Posicao;
 
-public class posicaoXadrez {
+public class posicaoXadres {
 
 	private char coluna;
 	private int linha;
 
-	public posicaoXadrez(char coluna, int linha) {
+	public posicaoXadres(char coluna, int linha) {
 		if (coluna < 'a' || coluna > 'h' || linha < 1 || linha > 8) {
-			throw new excessaoXadrez("Erro ao instanciar posicaoXadrez. Valores validos de a1 até h8");
+			throw new excessaoXadres("Erro ao instanciar posicaoXadres. Valores validos de a1 até h8");
 		}
 		this.coluna = coluna;
 		this.linha = linha;
@@ -22,18 +22,18 @@ public class posicaoXadrez {
 	public int getLinha() {
 		return linha;
 	}
-	
+
 	protected Posicao toPosicao() {
-		return  new Posicao (8 - linha, coluna - 'a');
+		return new Posicao(8 - linha, coluna - 'a');
 	}
 
-	protected static posicaoXadrez fromPosicao(Posicao posicao) {
-		return new posicaoXadrez((char)('a' - posicao.getColuna()), 8 - posicao.getLinha());
+	protected static posicaoXadres fromPosicao(Posicao posicao) {
+		return new posicaoXadres((char) ('a' - posicao.getColuna()), 8 - posicao.getLinha());
 	}
-	
+
 	@Override
 	public String toString() {
 		return "" + coluna + linha;
 	}
-	
+
 }

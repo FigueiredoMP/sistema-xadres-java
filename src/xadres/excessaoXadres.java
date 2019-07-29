@@ -2,10 +2,10 @@ package xadres;
 
 import boardgame.excessaoTabuleiro;
 
-public class excessaoXadrez extends excessaoTabuleiro {
+public class excessaoXadres extends excessaoTabuleiro {
 	private static final long serialVersionUID = 1L;
-	
-	public excessaoXadrez (String msg) {
+
+	public excessaoXadres(String msg) {
 		super(msg);
 	}
 }

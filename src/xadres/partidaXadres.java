@@ -11,7 +11,6 @@ public class partidaXadres {
 	private Tabuleiro tabuleiro;
 
 	public partidaXadres() {
-
 		tabuleiro = new Tabuleiro(8, 8);
 		configuracaoInicial();
 
@@ -27,13 +26,13 @@ public class partidaXadres {
 		return mat;
 	}
 	
-	public boolean[][] possivelMovimento(posicaoXadrez posicaoOrigem){
+	public boolean[][] movimentoPossivel(posicaoXadres posicaoOrigem){
 		Posicao posicao = posicaoOrigem.toPosicao();
 		validarPosicaoOrigem(posicao);
 		return tabuleiro.peca(posicao).movimentoPossivel();
 	}
 
-	public pecaXadres performaceMovimentoXadrez(posicaoXadrez posicaoOrigem, posicaoXadrez posicaoDestino) {
+	public pecaXadres performaceMovimentoXadres(posicaoXadres posicaoOrigem, posicaoXadres posicaoDestino) {
 		Posicao origem = posicaoOrigem.toPosicao();
 		Posicao destino = posicaoDestino.toPosicao();
 		validarPosicaoOrigem(origem);
@@ -51,22 +50,22 @@ public class partidaXadres {
 	
 	private void validarPosicaoOrigem(Posicao posicao) {
 		if(!tabuleiro.existePeca(posicao)) {
-			throw new excessaoXadrez("Nao ha uma peca na posicao de origem");
+			throw new excessaoXadres("Nao ha uma peca na posicao de origem");
 		}
-		if(tabuleiro.peca(posicao).existeMovimentoPossivel()) {
-			throw new excessaoXadrez("Nao existe movimentos para a peca escolhida!");
+		if(!tabuleiro.peca(posicao).existeMovimentoPossivel()) {
+			throw new excessaoXadres("Nao existe movimentos para a peca escolhida!");
 		}
 	}
 	
 	private void validarPosicaoDestino(Posicao origem, Posicao destino) {
-		if(tabuleiro.peca(origem).movimentoPossivel(origem)) {
-			throw new excessaoXadrez("Peca escolhida nao pode se mover para posicao de destino");
+		if(!tabuleiro.peca(origem).movimentoPossivel(destino)) {
+			throw new excessaoXadres("Peca escolhida nao pode se mover para posicao de destino");
 		}
 	}
 	
 	
 	private void posicaoNovaPeca(char coluna, int linha, pecaXadres peca) {
-		tabuleiro.posicaoPeca(peca, new posicaoXadrez(coluna, linha).toPosicao());
+		tabuleiro.posicaoPeca(peca, new posicaoXadres(coluna, linha).toPosicao());
 	}
 
 	private void configuracaoInicial() {

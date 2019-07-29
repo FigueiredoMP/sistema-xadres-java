@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 import xadres.Cor;
 import xadres.pecaXadres;
-import xadres.posicaoXadrez;
+import xadres.posicaoXadres;
 
 public class UI {
 
@@ -36,19 +36,19 @@ public class UI {
 		System.out.flush();
 	}
 
-	public static posicaoXadrez lePosicaoXadrez(Scanner sc) {
+	public static posicaoXadres lePosicaoXadres(Scanner sc) {
 		try {
 			String s = sc.nextLine();
 			char coluna = s.charAt(0);
 			int linha = Integer.parseInt(s.substring(1));
-			return new posicaoXadrez(coluna, linha);
-		} catch (RuntimeException e) {
-			throw new InputMismatchException("Erro, posição invalida. Validos somente de a1 ate h8");
+			return new posicaoXadres(coluna, linha);
+		} 
+				catch (RuntimeException e) {
+			throw new InputMismatchException("Erro, posicao invalida. Validos somente de a1 ate h8");
 		}
 	}
 
 	public static void imprimeTabuleiro(pecaXadres[][] pecas) {
-
 		for (int i = 0; i < pecas.length; i++) {
 			System.out.print((8 - i) + " ");
 			for (int j = 0; j < pecas.length; j++) {
@@ -60,11 +60,11 @@ public class UI {
 
 	}
 
-	public static void imprimeTabuleiro(pecaXadres[][] pecas, boolean[][] possivelMovimento) {
+	public static void imprimeTabuleiro(pecaXadres[][] pecas, boolean[][] movimentoPossivel) {
 		for (int i = 0; i < pecas.length; i++) {
 			System.out.print((8 - i) + " ");
 			for (int j = 0; j < pecas.length; j++) {
-				imprimePeca(pecas[i][j], possivelMovimento[i][j]);
+				imprimePeca(pecas[i][j], movimentoPossivel[i][j]);
 			}
 			System.out.println();
 		}

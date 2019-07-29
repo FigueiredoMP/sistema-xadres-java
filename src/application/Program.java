@@ -3,10 +3,10 @@ package application;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-import xadres.excessaoXadrez;
+import xadres.excessaoXadres;
 import xadres.partidaXadres;
 import xadres.pecaXadres;
-import xadres.posicaoXadrez;
+import xadres.posicaoXadres;
 
 public class Program {
 
@@ -21,25 +21,24 @@ public class Program {
 				UI.imprimeTabuleiro(partidaXadres.getpecas());
 				System.out.println();
 				System.out.print("Origem: ");
-				posicaoXadrez origem = UI.lePosicaoXadrez(sc);
+				posicaoXadres origem = UI.lePosicaoXadres(sc);
+				
 
-				boolean[][] possivelMovimento = partidaXadres.possivelMovimento(origem);
+				boolean[][] movimentoPossivel = partidaXadres.movimentoPossivel(origem);
 				UI.clearScreen();
-				UI.imprimeTabuleiro(partidaXadres.getpecas(), possivelMovimento);
-				
-				
-				
+				UI.imprimeTabuleiro(partidaXadres.getpecas(), movimentoPossivel);
 				System.out.println();
 				System.out.print("Destino: ");
-				posicaoXadrez destino = UI.lePosicaoXadrez(sc);
+				posicaoXadres destino = UI.lePosicaoXadres(sc);
 
-				pecaXadres pecaCapturada = partidaXadres.performaceMovimentoXadrez(origem, destino);
-			} catch (excessaoXadrez e) {
+				pecaXadres pecaCapturada = partidaXadres.performaceMovimentoXadres(origem, destino);
+			} 
+			catch (excessaoXadres e) {
 				System.out.println(e.getMessage());
-				sc.hasNextLine();
+				sc.nextLine();
 			} catch (InputMismatchException e) {
 				System.out.println(e.getMessage());
-				sc.hasNextLine();
+				sc.nextLine();
 			}
 		}
 	}
