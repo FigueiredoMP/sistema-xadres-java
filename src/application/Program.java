@@ -18,7 +18,7 @@ public class Program {
 		while (true) {
 			try {
 				UI.clearScreen();
-				UI.imprimeTabuleiro(partidaXadres.getpecas());
+				UI.imprimePartida(partidaXadres);
 				System.out.println();
 				System.out.print("Origem: ");
 				posicaoXadres origem = UI.lePosicaoXadres(sc);

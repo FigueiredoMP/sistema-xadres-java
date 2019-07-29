@@ -4,6 +4,7 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import xadres.Cor;
+import xadres.partidaXadres;
 import xadres.pecaXadres;
 import xadres.posicaoXadres;
 
@@ -46,6 +47,13 @@ public class UI {
 				catch (RuntimeException e) {
 			throw new InputMismatchException("Erro, posicao invalida. Validos somente de a1 ate h8");
 		}
+	}
+	
+	public static void imprimePartida(partidaXadres partidaXadres) {
+		imprimeTabuleiro(partidaXadres.getpecas());
+		System.out.println();
+		System.out.println("Turno: " + partidaXadres.getTurno());
+		System.out.println("Aguardando proximo jogador: " +partidaXadres.getJogadaorAtual() );
 	}
 
 	public static void imprimeTabuleiro(pecaXadres[][] pecas) {
