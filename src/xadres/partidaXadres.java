@@ -1,5 +1,8 @@
 package xadres;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import boardgame.Peca;
 import boardgame.Posicao;
 import boardgame.Tabuleiro;
@@ -11,6 +14,9 @@ public class partidaXadres {
 	private int turno;
 	private Cor jogadorAtual;
 	private Tabuleiro tabuleiro;
+	
+	private List<Peca> pecasTabuleiro = new ArrayList<>();
+	private List<Peca> pecasCapturadas = new ArrayList<>();
 
 	public partidaXadres() {
 		tabuleiro = new Tabuleiro(8, 8);
@@ -58,6 +64,11 @@ public class partidaXadres {
 		Peca p = tabuleiro.removePeca(origem);
 		Peca pecaCapturada = tabuleiro.removePeca(destino);
 		tabuleiro.posicaoPeca(p, destino);
+		
+		if(pecaCapturada != null) {
+			pecasTabuleiro.remove(pecaCapturada);
+			pecasCapturadas.add(pecaCapturada);
+		}
 		return pecaCapturada;
 	}
 
@@ -68,13 +79,13 @@ public class partidaXadres {
 		if (jogadorAtual != ((pecaXadres)tabuleiro.peca(posicao)).getCor()){
 			throw new excessaoXadres("A peca escolhida não é sua!");
 		}
-		if (!tabuleiro.peca(posicao).existeMovimentoPossivel()) {
+		if (tabuleiro.peca(posicao).existeMovimentoPossivel()) {
 			throw new excessaoXadres("Nao existe movimentos para a peca escolhida!");
 		}
 	}
 
 	private void validarPosicaoDestino(Posicao origem, Posicao destino) {
-		if (!tabuleiro.peca(origem).movimentoPossivel(destino)) {
+		if (tabuleiro.peca(origem).movimentoPossivel(destino)) {
 			throw new excessaoXadres("Peca escolhida nao pode se mover para posicao de destino");
 		}
 	}
@@ -86,6 +97,7 @@ public class partidaXadres {
 
 	private void posicaoNovaPeca(char coluna, int linha, pecaXadres peca) {
 		tabuleiro.posicaoPeca(peca, new posicaoXadres(coluna, linha).toPosicao());
+		pecasTabuleiro.add(peca);
 	}
 
 	private void configuracaoInicial() {
