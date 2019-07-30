@@ -28,7 +28,7 @@ public class posicaoXadres {
 	}
 
 	protected static posicaoXadres fromPosicao(Posicao posicao) {
-		return new posicaoXadres((char) ('a' - posicao.getColuna()), 8 - posicao.getLinha());
+		return new posicaoXadres((char) ('a' + posicao.getColuna()), 8 - posicao.getLinha());
 	}
 
 	@Override

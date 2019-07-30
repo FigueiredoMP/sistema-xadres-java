@@ -58,6 +58,9 @@ public class UI {
 		imprimePecaCapturada(capturada);
 		System.out.println("Turno: " + partidaXadres.getTurno());
 		System.out.println("Aguardando proximo jogador: " +partidaXadres.getJogadaorAtual() );
+		if(partidaXadres.getCheck()) {
+			System.out.println("CHECK!");
+		}
 	}
 
 	public static void imprimeTabuleiro(pecaXadres[][] pecas) {
