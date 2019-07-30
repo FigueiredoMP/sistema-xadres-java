@@ -17,6 +17,10 @@ public abstract class pecaXadres extends Peca {
 		return cor;
 	}
 	
+	public posicaoXadres  getPosicaoXadres() {
+		return posicaoXadres.fromPosicao(posicao);
+	}
+	
 	protected boolean ePecaOponente(Posicao posicao) {
 		pecaXadres p = (pecaXadres)getTabuleiro().peca(posicao);
 		return  p != null && p.getCor() != cor;
