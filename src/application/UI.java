@@ -46,20 +46,25 @@ public class UI {
 			char coluna = s.charAt(0);
 			int linha = Integer.parseInt(s.substring(1));
 			return new posicaoXadres(coluna, linha);
-		} 
-				catch (RuntimeException e) {
+		} catch (RuntimeException e) {
 			throw new InputMismatchException("Erro, posicao invalida. Validos somente de a1 ate h8");
 		}
 	}
-	
+
 	public static void imprimePartida(partidaXadres partidaXadres, List<pecaXadres> capturada) {
 		imprimeTabuleiro(partidaXadres.getpecas());
 		System.out.println();
 		imprimePecaCapturada(capturada);
 		System.out.println("Turno: " + partidaXadres.getTurno());
-		System.out.println("Aguardando proximo jogador: " +partidaXadres.getJogadaorAtual() );
-		if(partidaXadres.getCheck()) {
-			System.out.println("CHECK!");
+		if (!partidaXadres.getCheckMate()) {
+			System.out.println("Aguardando proximo jogador: " + partidaXadres.getJogadaorAtual());
+			if (partidaXadres.getCheck()) {
+				System.out.println("CHECK!");
+			}
+		}
+		else {
+			System.out.println("CHECKMATE!");
+			System.out.println("Winner: "+ partidaXadres.getJogadaorAtual());
 		}
 	}
 
@@ -93,21 +98,19 @@ public class UI {
 		}
 		if (peca == null) {
 			System.out.print("-" + ANSI_RESET);
-		} 
-		else {
+		} else {
 			if (peca.getCor() == Cor.BRANCO) {
 				System.out.print(ANSI_WHITE + peca + ANSI_RESET);
-			} 
-			else {
+			} else {
 				System.out.print(ANSI_YELLOW + peca + ANSI_RESET);
 			}
 		}
 		System.out.print(" ");
 	}
-	
+
 	private static void imprimePecaCapturada(List<pecaXadres> capturada) {
-		List<pecaXadres> Branco = capturada.stream().filter(x -> x.getCor()== Cor.BRANCO).collect(Collectors.toList());
-		List<pecaXadres> Preto = capturada.stream().filter(x -> x.getCor()== Cor.PRETO).collect(Collectors.toList());
+		List<pecaXadres> Branco = capturada.stream().filter(x -> x.getCor() == Cor.BRANCO).collect(Collectors.toList());
+		List<pecaXadres> Preto = capturada.stream().filter(x -> x.getCor() == Cor.PRETO).collect(Collectors.toList());
 		System.out.println("Pecas capturadas");
 		System.out.print("Brancas: ");
 		System.out.print(ANSI_WHITE);
@@ -117,6 +120,6 @@ public class UI {
 		System.out.print(ANSI_YELLOW);
 		System.out.println(Arrays.toString(Preto.toArray()));
 		System.out.println(ANSI_RESET);
-		
+
 	}
 }

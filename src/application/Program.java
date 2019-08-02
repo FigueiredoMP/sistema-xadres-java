@@ -17,7 +17,7 @@ public class Program {
 		partidaXadres partidaXadres = new partidaXadres();
 		List<pecaXadres> capturada = new ArrayList<>();
 
-		while (true) {
+		while (!partidaXadres.getCheckMate()) {
 			try {
 				UI.clearScreen();
 				UI.imprimePartida(partidaXadres, capturada);
@@ -47,6 +47,8 @@ public class Program {
 				sc.nextLine();
 			}
 		}
+		UI.clearScreen();
+		UI.imprimePartida(partidaXadres, capturada);
 	}
 
 }
