@@ -87,10 +87,11 @@ public class partidaXadres {
 	}
 
 	private Peca facaMovimento(Posicao origem, Posicao destino) {
-		Peca p = tabuleiro.removePeca(origem);
+		pecaXadres p = (pecaXadres)tabuleiro.removePeca(origem);
+		p.aumentarContMovimento();
 		Peca pecaCapturada = tabuleiro.removePeca(destino);
 		tabuleiro.posicaoPeca(p, destino);
-
+		
 		if (pecaCapturada != null) {
 			pecasTabuleiro.remove(pecaCapturada);
 			pecasCapturadas.add(pecaCapturada);
@@ -99,7 +100,8 @@ public class partidaXadres {
 	}
 
 	private void desfacaMovimento(Posicao origem, Posicao destino, Peca pecaCapturada) {
-		Peca p = tabuleiro.removePeca(destino);
+		pecaXadres p = (pecaXadres)tabuleiro.removePeca(destino);
+		p.diminuirContMovimento();
 		tabuleiro.posicaoPeca(p, origem);
 
 		if (pecaCapturada != null) {
