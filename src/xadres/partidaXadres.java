@@ -10,6 +10,7 @@ import boardgame.Tabuleiro;
 import xadres.pecas.Bispo;
 import xadres.pecas.Cavalo;
 import xadres.pecas.Peao;
+import xadres.pecas.Rainha;
 import xadres.pecas.Rei;
 import xadres.pecas.Torre;
 
@@ -199,6 +200,7 @@ public class partidaXadres {
 		posicaoNovaPeca('a', 1, new Torre(tabuleiro, Cor.BRANCO));
 		posicaoNovaPeca('b', 1, new Cavalo(tabuleiro, Cor.BRANCO));
 		posicaoNovaPeca('c', 1, new Bispo(tabuleiro, Cor.BRANCO));
+		posicaoNovaPeca('d', 1, new Rainha(tabuleiro, Cor.BRANCO));
 		posicaoNovaPeca('e', 1, new Rei(tabuleiro, Cor.BRANCO));
 		posicaoNovaPeca('f', 1, new Bispo(tabuleiro, Cor.BRANCO));
 		posicaoNovaPeca('g', 1, new Cavalo(tabuleiro, Cor.BRANCO));
@@ -215,6 +217,7 @@ public class partidaXadres {
 		posicaoNovaPeca('a', 8, new Torre(tabuleiro, Cor.PRETO));
 		posicaoNovaPeca('b', 8, new Cavalo(tabuleiro, Cor.PRETO));
 		posicaoNovaPeca('c', 8, new Bispo(tabuleiro, Cor.PRETO));
+		posicaoNovaPeca('d', 8, new Rainha(tabuleiro, Cor.PRETO));
 		posicaoNovaPeca('e', 8, new Rei(tabuleiro, Cor.PRETO));
 		posicaoNovaPeca('f', 8, new Bispo(tabuleiro, Cor.PRETO));
 		posicaoNovaPeca('g', 8, new Cavalo(tabuleiro, Cor.PRETO));

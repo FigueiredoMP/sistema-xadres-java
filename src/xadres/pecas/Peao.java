@@ -43,7 +43,7 @@ public class Peao extends pecaXadres{
 				mat[p.getLinha()][p.getColuna()] = true;
 			}
 			p.setValores(posicao.getLinha() + 2, posicao.getColuna());
-			Posicao p2 = new Posicao(posicao.getLinha() -1, posicao.getColuna());
+			Posicao p2 = new Posicao(posicao.getLinha() + 1, posicao.getColuna());
 			if (getTabuleiro().posicaoExistente(p) && !getTabuleiro().existePeca(p) && getTabuleiro().posicaoExistente(p2) && !getTabuleiro().existePeca(p2) && getContMovimento() == 0) {
 				mat[p.getLinha()][p.getColuna()] = true;
 			}
@@ -63,7 +63,7 @@ public class Peao extends pecaXadres{
 	
 	@Override
 	public String toString() {
-		return "p";
+		return "P";
 	}
 	 
 		
