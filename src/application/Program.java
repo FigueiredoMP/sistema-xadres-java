@@ -5,41 +5,46 @@ import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
-import xadres.excessaoXadres;
-import xadres.partidaXadres;
-import xadres.pecaXadres;
-import xadres.posicaoXadres;
+import chess.ChessException;
+import chess.ChessMatch;
+import chess.ChessPiece;
+import chess.ChessPosition;
 
 public class Program {
 
 	public static void main(String[] args) {
-		Scanner sc = new Scanner(System.in);
-		partidaXadres partidaXadres = new partidaXadres();
-		List<pecaXadres> capturada = new ArrayList<>();
 
-		while (!partidaXadres.getCheckMate()) {
+		Scanner sc = new Scanner(System.in);
+		ChessMatch chessMatch = new ChessMatch();
+		List<ChessPiece> captured = new ArrayList<>();
+
+		while (!chessMatch.getCheckMate()) {
 			try {
 				UI.clearScreen();
-				UI.imprimePartida(partidaXadres, capturada);
+				UI.printMatch(chessMatch, captured);
 				System.out.println();
-				System.out.print("Origem: ");
-				posicaoXadres origem = UI.lePosicaoXadres(sc);
-				
+				System.out.print("Source: ");
+				ChessPosition source = UI.readChessPosition(sc);
 
-				boolean[][] movimentoPossivel = partidaXadres.movimentoPossivel(origem);
+				boolean[][] possibleMoves = chessMatch.possibleMoves(source);
 				UI.clearScreen();
-				UI.imprimeTabuleiro(partidaXadres.getpecas(), movimentoPossivel);
+				UI.printBoard(chessMatch.getPieces(), possibleMoves);
 				System.out.println();
-				System.out.print("Destino: ");
-				posicaoXadres destino = UI.lePosicaoXadres(sc);
+				System.out.print("Target: ");
+				ChessPosition target = UI.readChessPosition(sc);
 
-				pecaXadres pecaCapturada = partidaXadres.performaceMovimentoXadres(origem, destino);
-				
-				if(pecaCapturada != null) {
-					capturada.add(pecaCapturada);
+				ChessPiece capturedPiece = chessMatch.performChessMove(source, target);
+
+				if (capturedPiece != null) {
+					captured.add(capturedPiece);
 				}
-			} 
-			catch (excessaoXadres e) {
+
+				if (chessMatch.getPromoted() != null) {
+					System.out.print("Enter piece for promotion (B/N/R/Q): ");
+					String type = sc.nextLine();
+					chessMatch.replacePromotedPiece(type);
+				}
+			} catch (ChessException e) {
 				System.out.println(e.getMessage());
 				sc.nextLine();
 			} catch (InputMismatchException e) {
@@ -48,7 +53,6 @@ public class Program {
 			}
 		}
 		UI.clearScreen();
-		UI.imprimePartida(partidaXadres, capturada);
+		UI.printMatch(chessMatch, captured);
 	}
-
 }

@@ -6,10 +6,10 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
-import xadres.Cor;
-import xadres.partidaXadres;
-import xadres.pecaXadres;
-import xadres.posicaoXadres;
+import chess.ChessMatch;
+import chess.ChessPiece;
+import chess.ChessPosition;
+import chess.Color;
 
 public class UI {
 
@@ -40,86 +40,85 @@ public class UI {
 		System.out.flush();
 	}
 
-	public static posicaoXadres lePosicaoXadres(Scanner sc) {
+	public static ChessPosition readChessPosition(Scanner sc) {
 		try {
 			String s = sc.nextLine();
-			char coluna = s.charAt(0);
-			int linha = Integer.parseInt(s.substring(1));
-			return new posicaoXadres(coluna, linha);
+			char column = s.charAt(0);
+			int row = Integer.parseInt(s.substring(1));
+			return new ChessPosition(column, row);
 		} catch (RuntimeException e) {
-			throw new InputMismatchException("Erro, posicao invalida. Validos somente de a1 ate h8");
+			throw new InputMismatchException("Error reading ChessPosition. Valid values are from a1 to h8.");
 		}
 	}
 
-	public static void imprimePartida(partidaXadres partidaXadres, List<pecaXadres> capturada) {
-		imprimeTabuleiro(partidaXadres.getpecas());
+	public static void printMatch(ChessMatch chessMatch, List<ChessPiece> captured) {
+		printBoard(chessMatch.getPieces());
 		System.out.println();
-		imprimePecaCapturada(capturada);
-		System.out.println("Turno: " + partidaXadres.getTurno());
-		if (!partidaXadres.getCheckMate()) {
-			System.out.println("Aguardando proximo jogador: " + partidaXadres.getJogadaorAtual());
-			if (partidaXadres.getCheck()) {
+		printCapturedPieces(captured);
+		System.out.println();
+		System.out.println("Turn : " + chessMatch.getTurn());
+		if (!chessMatch.getCheckMate()) {
+			System.out.println("Waiting player: " + chessMatch.getCurrentPlayer());
+			if (chessMatch.getCheck()) {
 				System.out.println("CHECK!");
 			}
-		}
-		else {
+		} else {
 			System.out.println("CHECKMATE!");
-			System.out.println("Winner: "+ partidaXadres.getJogadaorAtual());
+			System.out.println("Winner: " + chessMatch.getCurrentPlayer());
 		}
 	}
 
-	public static void imprimeTabuleiro(pecaXadres[][] pecas) {
-		for (int i = 0; i < pecas.length; i++) {
+	public static void printBoard(ChessPiece[][] pieces) {
+		for (int i = 0; i < pieces.length; i++) {
 			System.out.print((8 - i) + " ");
-			for (int j = 0; j < pecas.length; j++) {
-				imprimePeca(pecas[i][j], false);
+			for (int j = 0; j < pieces.length; j++) {
+				printPiece(pieces[i][j], false);
 			}
 			System.out.println();
 		}
 		System.out.println("  a b c d e f g h");
-
 	}
 
-	public static void imprimeTabuleiro(pecaXadres[][] pecas, boolean[][] movimentoPossivel) {
-		for (int i = 0; i < pecas.length; i++) {
+	public static void printBoard(ChessPiece[][] pieces, boolean[][] possibleMoves) {
+		for (int i = 0; i < pieces.length; i++) {
 			System.out.print((8 - i) + " ");
-			for (int j = 0; j < pecas.length; j++) {
-				imprimePeca(pecas[i][j], movimentoPossivel[i][j]);
+			for (int j = 0; j < pieces.length; j++) {
+				printPiece(pieces[i][j], possibleMoves[i][j]);
 			}
 			System.out.println();
 		}
 		System.out.println("  a b c d e f g h");
-
 	}
 
-	private static void imprimePeca(pecaXadres peca, boolean fundo) {
-		if (fundo) {
+	private static void printPiece(ChessPiece piece, boolean background) {
+		if (background) {
 			System.out.print(ANSI_BLUE_BACKGROUND);
 		}
-		if (peca == null) {
+		if (piece == null) {
 			System.out.print("-" + ANSI_RESET);
 		} else {
-			if (peca.getCor() == Cor.BRANCO) {
-				System.out.print(ANSI_WHITE + peca + ANSI_RESET);
+			if (piece.getColor() == Color.WHITE) {
+				System.out.print(ANSI_WHITE + piece + ANSI_RESET);
 			} else {
-				System.out.print(ANSI_YELLOW + peca + ANSI_RESET);
+				System.out.print(ANSI_YELLOW + piece + ANSI_RESET);
 			}
 		}
 		System.out.print(" ");
 	}
 
-	private static void imprimePecaCapturada(List<pecaXadres> capturada) {
-		List<pecaXadres> Branco = capturada.stream().filter(x -> x.getCor() == Cor.BRANCO).collect(Collectors.toList());
-		List<pecaXadres> Preto = capturada.stream().filter(x -> x.getCor() == Cor.PRETO).collect(Collectors.toList());
-		System.out.println("Pecas capturadas");
-		System.out.print("Brancas: ");
+	private static void printCapturedPieces(List<ChessPiece> captured) {
+		List<ChessPiece> white = captured.stream().filter(x -> x.getColor() == Color.WHITE)
+				.collect(Collectors.toList());
+		List<ChessPiece> black = captured.stream().filter(x -> x.getColor() == Color.BLACK)
+				.collect(Collectors.toList());
+		System.out.println("Captured pieces:");
+		System.out.print("White: ");
 		System.out.print(ANSI_WHITE);
-		System.out.println(Arrays.toString(Branco.toArray()));
+		System.out.println(Arrays.toString(white.toArray()));
 		System.out.print(ANSI_RESET);
-		System.out.print("Pretas: ");
+		System.out.print("Black: ");
 		System.out.print(ANSI_YELLOW);
-		System.out.println(Arrays.toString(Preto.toArray()));
-		System.out.println(ANSI_RESET);
-
+		System.out.println(Arrays.toString(black.toArray()));
+		System.out.print(ANSI_RESET);
 	}
 }
